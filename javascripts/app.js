@@ -1,3 +1,8 @@
+SC.initialize({
+  client_id: '5c9d9495ad00839c28558426b440b05a'
+});
+
+
 console.log("Hello");
 var mediaConstraints = {
   audio: true
