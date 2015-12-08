@@ -8,20 +8,12 @@
 </head>
   <h1>Hello World</h1>
 <body>
+  <button type="record" id="record">Record</button>
   <button type="stop" id="stopRecording">Stop</button>
   <button type="pause" id="pauseRecording">Pause</button>
   <button type="resume" id="resumeRecording">Resume</button>
   <button type="save" id="saveRecording">Save</button>
-  <audio autobuffer autoloop loop controls>
-    <source src="/media/audio.oga">
-    <source src="/media/audio.wav">
-    <object type="audio/x-wav" data="/media/audio.wav" width="290" height="45">
-      <param name="src" value="/media/audio.wav">
-      <param name="autoplay" value="false">
-      <param name="autoStart" value="0">
-      <p><a href="/media/audio.wav">Download this audio file.</a></p>
-    </object>
-  </audio>
+
   <div id="output">
 
   </div>

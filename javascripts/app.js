@@ -1,43 +1,47 @@
 $(document).ready(function(){
   console.log("Hello");
-  var mediaConstraints = {
-    audio: true
-  };
 
-  navigator.getUserMedia(mediaConstraints, onMediaSuccess, onMediaError);
+$("#record").on('click', function(){
 
-  function onMediaSuccess(stream) {
-    var mediaRecorder = new MediaStreamRecorder(stream);
-    mediaRecorder.mimeType = 'audio/ogg';
-    mediaRecorder.audioChannels = 2;
-    mediaRecorder.ondataavailable = function (blob) {
-      var blobURL = URL.createObjectURL(blob);
-      $("#output").append('<a href="' + blobURL + '">' + blobURL + '</a>');
+    var mediaConstraints = {
+      audio: true
     };
-    mediaRecorder.start(5000);
 
-    $("#stopRecording").on('click', function(){
-      mediaRecorder.stop();
-      console.log("Recording Stopped");
-    });
+    navigator.getUserMedia(mediaConstraints, onMediaSuccess, onMediaError);
 
-    $("#pauseRecording").on('click', function(){
-      mediaRecorder.pause();
-    });
+    function onMediaSuccess(stream) {
+      var mediaRecorder = new MediaStreamRecorder(stream);
+      mediaRecorder.mimeType = 'audio/ogg';
+      mediaRecorder.audioChannels = 1;
+      mediaRecorder.ondataavailable = function (blob) {
+        console.log("blob", blob);
+        var blobURL = URL.createObjectURL(blob);
+        $("#output").append('<audio preload="auto" src="' + blobURL + '" controls=""></audio>');
+      };
+      mediaRecorder.start(5000);
 
-    $("#resumeRecording").on('click', function(){
-      mediaRecorder.resume();
-    });
+      $("#stopRecording").on('click', function(){
+        mediaRecorder.stop();
+      });
 
-    $("#saveRecording").on('click', function(){
-      mediaRecorder.save();
-    });
+      $("#pauseRecording").on('click', function(){
+        mediaRecorder.pause();
+      });
 
-  }
+      $("#resumeRecording").on('click', function(){
+        mediaRecorder.resume();
+      });
+
+      $("#saveRecording").on('click', function(){
+        mediaRecorder.save();
+      });
+
+    }
 
 
-  function onMediaError(e) {
-    console.log("Media Error", e);
-  }
+    function onMediaError(e) {
+      console.log("Media Error", e);
+    }
+  });
 
 });
