@@ -1,7 +1,6 @@
 $(document).ready(function(){
   console.log("Hello");
 
-$("#record").on('click', function(){
 
     var mediaConstraints = {
       audio: true
@@ -18,22 +17,25 @@ $("#record").on('click', function(){
         var blobURL = URL.createObjectURL(blob);
         $("#output").append('<audio preload="auto" src="' + blobURL + '" controls=""></audio>');
       };
-      mediaRecorder.start(5000);
 
-      $("#stopRecording").on('click', function(){
-        mediaRecorder.stop();
-      });
+      $("#record").on('click', function(){
+        mediaRecorder.start(5000);
 
-      $("#pauseRecording").on('click', function(){
-        mediaRecorder.pause();
-      });
+        $("#stopRecording").on('click', function(){
+          mediaRecorder.stop();
+        });
 
-      $("#resumeRecording").on('click', function(){
-        mediaRecorder.resume();
-      });
+        $("#pauseRecording").on('click', function(){
+          mediaRecorder.pause();
+        });
 
-      $("#saveRecording").on('click', function(){
-        mediaRecorder.save();
+        $("#resumeRecording").on('click', function(){
+          mediaRecorder.resume();
+        });
+
+        $("#saveRecording").on('click', function(){
+          mediaRecorder.save();
+        });
       });
 
     }
@@ -44,4 +46,3 @@ $("#record").on('click', function(){
     }
   });
 
-});
