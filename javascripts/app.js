@@ -16,6 +16,8 @@ $(document).ready(function(){
       var mediaRecorder = new MediaStreamRecorder(stream);
       mediaRecorder.mimeType = 'audio/ogg';
       mediaRecorder.audioChannels = 1;
+
+    //when data is available, ability to record will be granted
       mediaRecorder.ondataavailable = function (blob) {
         console.log("blob", blob);
         var arrayBuffer;
@@ -29,8 +31,6 @@ $(document).ready(function(){
         fileReader.readAsDataURL(blob);
 
         var blobURL = URL.createObjectURL(blob);
-        var blobArray = fileReader.readAsArrayBuffer(blob);
-        console.log("blobArray", blobArray);
         console.log("blobURL", blobURL);
         $("#output").append('<audio preload="auto" src="' + blobURL + '" controls=""></audio>');
       };
