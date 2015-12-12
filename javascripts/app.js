@@ -67,7 +67,7 @@ $(document).ready(function(){
     }
 
   //retrieve audio function using basic ajax call to firebase
-    function recieveAudio(){
+    function receiveAudio(){
       $.ajax({
         url : "https://city-streamed.firebaseio.com/audio/-K5LwaOllHJVmVQzXOzC.json"
     //callback for converting data from base64 back to blob
@@ -89,9 +89,9 @@ $(document).ready(function(){
     }
 
   //functionality for retrieve audio button
-    $("#recieveAudio").on('click', function(){
+    $("#receiveAudio").on('click', function(){
       console.log("click");
-      recieveAudio();
+      receiveAudio();
     });
 
   });
