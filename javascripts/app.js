@@ -20,27 +20,41 @@ $(document).ready(function(){
     //when data is available, ability to record will be granted
       mediaRecorder.ondataavailable = function (blob) {
         console.log("blob", blob);
-        var arrayBuffer;
+
+        //declare variables to test conversion to base64
         var testBase64;
+
+        //construct new fileReader object
         var fileReader = new FileReader();
         fileReader.onload = function () {
+
+          //declare dataURL variable from fileReader
           var dataUrl =  fileReader.result;
           testBase64 = dataUrl.split(",")[1];
           console.log("testBase64", testBase64);
+          $.ajax({
+            url: "https://city-streamed.firebaseio.com/audio.json",
+            method: "POST",
+            data: JSON.stringify(testBase64)
+            }).done(function(testBase64) {
+              console.log("Your new recording is ", testBase64);
+            });
+          return testBase64;
         };
+
         fileReader.readAsDataURL(blob);
 
+      //creates cached preview to listen to recording in browser
         var blobURL = URL.createObjectURL(blob);
         console.log("blobURL", blobURL);
         $("#output").append('<audio preload="auto" src="' + blobURL + '" controls=""></audio>');
       };
 
       $("#record").on('click', function(){
-        mediaRecorder.start(5000);
+        mediaRecorder.start(15000);
 
         $("#stopRecording").on('click', function(){
           mediaRecorder.stop();
-          console.log("mediaRecorder.blobs", mediaRecorder.blobs);
         });
 
         $("#pauseRecording").on('click', function(){
