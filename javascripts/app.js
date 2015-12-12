@@ -78,11 +78,9 @@ $(document).ready(function(){
       console.log("Media Error", e);
     }
 
-    function retrieveAudio(e){
-      e.preventDefault();
+    function retrieveAudio(){
       $.ajax({
-        url : "https://city-streamed.com/audio.json",
-        method : GET
+        url : "https://city-streamed.firebaseio.com/audio/-K5LwaOllHJVmVQzXOzC.json"
       }).done(function(data){
         console.log("You've got data", data);
         var binary = atob(data);
@@ -94,8 +92,15 @@ $(document).ready(function(){
         }
         var blob = new Blob([view]);
         console.log("blob", blob);
+        var blobURL = URL.createObjectURL(blob);
+        $("#output").append('<audio preload="auto" src="' + blobURL + '" controls=""></audio>');
       });
     }
+
+    $("#retrieveAudio").on('click', function(){
+      console.log("click");
+      retrieveAudio();
+    });
 
   });
 
