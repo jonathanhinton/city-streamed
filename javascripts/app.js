@@ -68,24 +68,26 @@ $(document).ready(function(){
 
   //retrieve audio function using basic ajax call to firebase
     function receiveAudio(){
-      $.ajax({
-        url : "https://city-streamed.firebaseio.com/audio/-K5LwaOllHJVmVQzXOzC.json"
-    //callback for converting data from base64 back to blob
-      }).done(function(data){
-        console.log("You've got data", data);
-        var binary = atob(data);
-        var len = binary.length;
-        var buffer = new ArrayBuffer(len);
-        var view = new Uint8Array(buffer);
-        for (var i = 0; i < len; i++) {
-          view[i] = binary.charCodeAt(i);
-        }
-        var blob = new Blob([view]);
-        console.log("blob", blob);
-        var blobURL = URL.createObjectURL(blob);
-      //append blobURL to DOM for playback
-        $("#output").html('<audio autoplay preload="auto" src="' + blobURL + '" controls></audio>');
-      });
+      setInterval(function(){
+        $.ajax({
+          url : "https://city-streamed.firebaseio.com/audio/-K5LwaOllHJVmVQzXOzC.json"
+      //callback for converting data from base64 back to blob
+        }).done(function(data){
+          console.log("You've got data", data);
+          var binary = atob(data);
+          var len = binary.length;
+          var buffer = new ArrayBuffer(len);
+          var view = new Uint8Array(buffer);
+          for (var i = 0; i < len; i++) {
+            view[i] = binary.charCodeAt(i);
+          }
+          var blob = new Blob([view]);
+          console.log("blob", blob);
+          var blobURL = URL.createObjectURL(blob);
+        //append blobURL to DOM for playback
+          $("#output").html('<audio autoplay preload="auto" src="' + blobURL + '" controls></audio>');
+        });
+      }, 5000);
     }
 
   //functionality for retrieve audio button
