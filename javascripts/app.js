@@ -32,6 +32,7 @@ $(document).ready(function(){
           var dataUrl =  fileReader.result;
           testBase64 = dataUrl.split(",")[1];
           console.log("testBase64", testBase64);
+          //POST base64 to firebase
           $.ajax({
             url: "https://city-streamed.firebaseio.com/audio.json",
             method: "POST",
@@ -76,5 +77,25 @@ $(document).ready(function(){
     function onMediaError(e) {
       console.log("Media Error", e);
     }
+
+    function retrieveAudio(e){
+      e.preventDefault();
+      $.ajax({
+        url : "https://city-streamed.com/audio.json",
+        method : GET
+      }).done(function(data){
+        console.log("You've got data", data);
+        var binary = atob(data);
+        var len = binary.length;
+        var buffer = new ArrayBuffer(len);
+        var view = new Uint8Array(buffer);
+        for (var i = 0; i < len; i++) {
+          view[i] = binary.charCodeAt(i);
+        }
+        var blob = new Blob([view]);
+        console.log("blob", blob);
+      });
+    }
+
   });
 
