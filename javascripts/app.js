@@ -51,10 +51,10 @@ $(document).ready(function(){
         $("#output").append('<audio preload="auto" src="' + blobURL + '" controls=""></audio>');
       };
 
-      $("#record").on('click', function(){
+      $("#transmit").mousedown(function(){
         mediaRecorder.start(15000);
 
-        $("#stopRecording").on('click', function(){
+        $("#transmit").mouseup(function(){
           mediaRecorder.stop();
         });
 
@@ -78,9 +78,11 @@ $(document).ready(function(){
       console.log("Media Error", e);
     }
 
+  //retrieve audio function using basic ajax call to firebase
     function retrieveAudio(){
       $.ajax({
         url : "https://city-streamed.firebaseio.com/audio/-K5LwaOllHJVmVQzXOzC.json"
+    //callback for converting data from base64 back to blob
       }).done(function(data){
         console.log("You've got data", data);
         var binary = atob(data);
@@ -93,10 +95,12 @@ $(document).ready(function(){
         var blob = new Blob([view]);
         console.log("blob", blob);
         var blobURL = URL.createObjectURL(blob);
+      //append blobURL to DOM for playback
         $("#output").append('<audio preload="auto" src="' + blobURL + '" controls=""></audio>');
       });
     }
 
+  //functionality for retrieve audio button
     $("#retrieveAudio").on('click', function(){
       console.log("click");
       retrieveAudio();
