@@ -2,6 +2,12 @@ SC.initialize({
   client_id: '5c9d9495ad00839c28558426b440b05a'
 });
 
+SC.oEmbed('https://soundcloud.com/jonathan-hinton-853841129/sets/citystreamed',{
+  auto_play: false
+}).then(function(embed){
+  console.log("oEmbed response", embed);
+});
+
 $(document).ready(function(){
   console.log("Hello");
 
