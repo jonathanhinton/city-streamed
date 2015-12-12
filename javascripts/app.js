@@ -84,7 +84,7 @@ $(document).ready(function(){
         console.log("blob", blob);
         var blobURL = URL.createObjectURL(blob);
       //append blobURL to DOM for playback
-        $("#output").append('<audio preload="auto" src="' + blobURL + '" controls=""></audio>');
+        $("#output").html('<audio autoplay preload="auto" src="' + blobURL + '" controls></audio>');
       });
     }
 
