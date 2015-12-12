@@ -57,18 +57,6 @@ $(document).ready(function(){
         $("#transmit").mouseup(function(){
           mediaRecorder.stop();
         });
-
-        $("#pauseRecording").on('click', function(){
-          mediaRecorder.pause();
-        });
-
-        $("#resumeRecording").on('click', function(){
-          mediaRecorder.resume();
-        });
-
-        $("#saveRecording").on('click', function(){
-          mediaRecorder.save();
-        });
       });
 
     }
@@ -79,7 +67,7 @@ $(document).ready(function(){
     }
 
   //retrieve audio function using basic ajax call to firebase
-    function retrieveAudio(){
+    function recieveAudio(){
       $.ajax({
         url : "https://city-streamed.firebaseio.com/audio/-K5LwaOllHJVmVQzXOzC.json"
     //callback for converting data from base64 back to blob
@@ -101,9 +89,9 @@ $(document).ready(function(){
     }
 
   //functionality for retrieve audio button
-    $("#retrieveAudio").on('click', function(){
+    $("#recieveAudio").on('click', function(){
       console.log("click");
-      retrieveAudio();
+      recieveAudio();
     });
 
   });
