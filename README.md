@@ -2,7 +2,7 @@
 Capstone project for front end development portion of Nashville Software School.
 
 #Running The App
-After cloning the repo run
+After cloning the repo, in the main folder enter the folling commands:
 ```
 cd lib
 bower install
