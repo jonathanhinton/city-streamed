@@ -2,6 +2,17 @@ SC.initialize({
   client_id: '5c9d9495ad00839c28558426b440b05a'
 });
 
+OAuth.initialize('n2jZCZtPE01zQ0LbcOThbm12o9Y');
+
+var ref = new Firebase("https://city-streamed.firebaseio.com");
+ref.authWithOAuthPopup("github", function(error, authData) {
+  if (error) {
+    console.log("Login Failed!", error);
+  } else {
+    console.log("Authenticated successfully with payload:", authData);
+  }
+});
+
 
 $(document).ready(function(){
   console.log("Hello");
@@ -14,7 +25,7 @@ $(document).ready(function(){
   //gain access to user microphone (note: only works with https)
     navigator.getUserMedia(mediaConstraints, onMediaSuccess, onMediaError);
 
-  //if successfull this function will fire
+  //if no errors in getUserMedia() this function will fire
     function onMediaSuccess(stream) {
 
     //create mediaStreamRecorder object
@@ -22,7 +33,7 @@ $(document).ready(function(){
       mediaRecorder.mimeType = 'audio/ogg';
       mediaRecorder.audioChannels = 1;
 
-    //when data is available, ability to record will be granted
+    //when data is available, on stop() we see the blob!
       mediaRecorder.ondataavailable = function (blob) {
         console.log("blob", blob);
 
@@ -56,42 +67,44 @@ $(document).ready(function(){
         $("#output").append('<audio preload="auto" src="' + blobURL + '" controls=""></audio>');
       };
 
+    //temporary countdown provided by http://jsfiddle.net/mrwilk/qVuHW/
+      function countdown( elementName, minutes, seconds )
+        {
+            var element, endTime, hours, mins, msLeft, time;
+
+            function twoDigits( n )
+            {
+                return (n <= 9 ? "0" + n : n);
+            }
+
+            function updateTimer()
+            {
+                msLeft = endTime - (+new Date());
+                if ( msLeft < 1000 ) {
+                    element.innerHTML = "countdown's over!";
+                } else {
+                    time = new Date( msLeft );
+                    hours = time.getUTCHours();
+                    mins = time.getUTCMinutes();
+                    element.innerHTML = (hours ? hours + ':' + twoDigits( mins ) : mins) + ':' + twoDigits( time.getUTCSeconds() );
+                    setTimeout( updateTimer, time.getUTCMilliseconds() + 500 );
+                }
+            }
+
+            element = document.getElementById( elementName );
+            endTime = (+new Date()) + 1000 * (60*minutes + seconds) + 500;
+            updateTimer();
+        }
+
     //MOUSEDOWN begins transmission
       $("#transmit").mousedown(function(){
         mediaRecorder.start(15000);
-        //temporary countdown provided by http://jsfiddle.net/mrwilk/qVuHW/
-        function countdown( elementName, minutes, seconds )
-          {
-              var element, endTime, hours, mins, msLeft, time;
-
-              function twoDigits( n )
-              {
-                  return (n <= 9 ? "0" + n : n);
-              }
-
-              function updateTimer()
-              {
-                  msLeft = endTime - (+new Date());
-                  if ( msLeft < 1000 ) {
-                      element.innerHTML = "countdown's over!";
-                  } else {
-                      time = new Date( msLeft );
-                      hours = time.getUTCHours();
-                      mins = time.getUTCMinutes();
-                      element.innerHTML = (hours ? hours + ':' + twoDigits( mins ) : mins) + ':' + twoDigits( time.getUTCSeconds() );
-                      setTimeout( updateTimer, time.getUTCMilliseconds() + 500 );
-                  }
-              }
-
-              element = document.getElementById( elementName );
-              endTime = (+new Date()) + 1000 * (60*minutes + seconds) + 500;
-              updateTimer();
-          }
 
           countdown( "countdown", 0, 15 );
       //MOUSEUP ends transmission
         $("#transmit").mouseup(function(){
           mediaRecorder.stop();
+          countdown("countdown", 0, 0);
         });
       });
 
