@@ -1,21 +1,60 @@
-SC.initialize({
-  client_id: '5c9d9495ad00839c28558426b440b05a'
-});
-
-OAuth.initialize('n2jZCZtPE01zQ0LbcOThbm12o9Y');
-
-var ref = new Firebase("https://city-streamed.firebaseio.com");
-ref.authWithOAuthPopup("github", function(error, authData) {
-  if (error) {
-    console.log("Login Failed!", error);
-  } else {
-    console.log("Authenticated successfully with payload:", authData);
-  }
-});
-
-
 $(document).ready(function(){
   console.log("Hello");
+
+  SC.initialize({
+    client_id: '5c9d9495ad00839c28558426b440b05a'
+  });
+
+  OAuth.initialize('n2jZCZtPE01zQ0LbcOThbm12o9Y');
+
+  var ref = new Firebase("https://city-streamed.firebaseio.com");
+  $("#launchModal").on('click', function(){
+    $("#loginModal").modal('show');
+  });
+
+  $("#githubAuth").on('click', function(){
+    ref.authWithOAuthPopup("github", function(error, authData) {
+      if (error) {
+        console.log("Login Failed!", error);
+      } else {
+        var ref = new Firebase("city-streamed.firebaseio.com/users/" + authData.uid + "/userinfo");
+        ref.set({
+          email : userEmail,
+          userName : authData.github.displayName,
+          uid : authData.auth.uid,
+          image : authData.github.profileImageURL,
+        });
+        console.log("Authenticated successfully with payload:", authData);
+      }
+    });
+    $("#loginModal").modal("hide");
+  });
+
+  $("#createUser").on('click', function(){
+    var newUserEmail = $("#userEmail").val();
+    var userName = $("#userName").val();
+    var userPassword = $("#userPassword").val();
+    ref.createUser({
+      email : newUserEmail,
+      password : userPassword
+    }, function(error, userData){
+      if (error) {
+        console.log("error creating account", error);
+      } else {
+        console.log("successfully created user account", userData.uid);
+        var ref = new Firebase("https://city-streamed.firebaseio.com/users/"+ userData.uid + "/userinfo");
+        ref.set({
+          userName : userName,
+          userEmail : newUserEmail,
+          audio : []
+        });
+      }
+    }
+    );
+    $("#loginModal").modal("hide");
+  });
+
+
 
   //set media constraints for audio only
     var mediaConstraints = {

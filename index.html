@@ -4,14 +4,37 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>City Streamed</title>
+  <link rel="stylesheet" type="text/css" href="lib/bower_components/bootstrap/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="styles/main.css">
 </head>
+<body>
+  <button type="" id="launchModal">Sign Up or Login</button>
+  <div id="loginModal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Sign Up or Login</h4>
+        </div>
+        <div class="modal-body">
+          <input type="text" class="form-control" name="username" id="userName" value="" placeholder="First and Last Name Please">
+          <input type="email" name="userEmail" class="form-control" id="userEmail" value="" placeholder="please type in your email">
+          <input type="password" name="userPassword" value="" placeholder="password" id="userPassword">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" id="createUser">Create User</button>
+          <button type="button" class="btn btn-primary" id="githubAuth">Authenticate with Github</button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+
   <p>Instructions: press and <strong><em>hold</em></strong> "Transmit" button until you are finished answering Pay attention to timer at bottom, have fun!  Keep in mind the recording works more like a live stream than a tape recorder...meaning, we won't edit audio. Recording will be posted to Firebase on MouseUp event.  Thanks!</p>
   <h1>3 Questions:</h1>
   <h2>1. What is one piece of advice you would give to Evening Cohort 3?</h2>
   <h2>2. What is your favorite dish at your favorite restaurant here in Nashville?</h2>
   <h2>3. Briefly describe the most amazing place on Earth you’ve been.</h2>
-<body>
   <button type="transmit" id="transmit">Transmit</button>
   <button type="receive" id="receiveAudio">Receive</button>
 
@@ -26,6 +49,7 @@
   </div>
   <script src="lib/bower_components/jquery/dist/jquery.min.js"></script>
   <script src="lib/bower_components/oauth-js/dist/oauth.min.js"></script>
+  <script src="lib/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
   <script src="lib/bower_components/firebase/firebase.js"></script>
   <script src="lib/node_modules/msr/MediaStreamRecorder.min.js"></script>
   <script src="lib/node_modules/soundcloud/sdk.js"></script>
