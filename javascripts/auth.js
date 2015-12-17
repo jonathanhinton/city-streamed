@@ -47,10 +47,10 @@ var auth = angular.module('Authorize', ['firebase']);
           console.log("user logged in with id:", userData.uid);
           var ref = new Firebase('https://city-streamed.firebaseio.com/users/' + userData.uid + '/userinfo');
           ref.set({
-            email : $userEmail,
-            userName : $authData.github.displayName,
-            uid : $authData.auth.uid,
-            image : $authData.github.profileImageURL
+            email : $scope.email,
+            userName : userData.github.displayName,
+            uid : userData.auth.uid,
+            image : userData.github.profileImageURL
           });
           $location.path('/profile.html');
         }).catch(function(error){
