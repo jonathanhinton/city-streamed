@@ -3,7 +3,11 @@ var app = angular.module('cityStreamed', ['Authorize', 'firebase', 'ngRoute', 'n
   app.config([
     '$routeProvider',
       function($routeProvider){
-
+        $routeProvider
+        .when('/', {
+          templateUrl: '/partials/login.html',
+          controller: 'authUserCtrl'
+        });
       }
     ]
   );
