@@ -22,7 +22,7 @@ $(document).ready(function(){
           email : userEmail,
           userName : authData.github.displayName,
           uid : authData.auth.uid,
-          image : authData.github.profileImageURL,
+          image : authData.github.profileImageURL
         });
         console.log("Authenticated successfully with payload:", authData);
       }
