@@ -52,7 +52,7 @@ var auth = angular.module('Authorize', ['firebase']);
             uid : userData.auth.uid,
             image : userData.github.profileImageURL
           });
-          $location.path('/profile.html');
+          $location.path('/profile');
         }).catch(function(error){
           console.log("user not logged in with error", error);
         });
