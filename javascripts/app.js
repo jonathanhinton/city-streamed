@@ -54,6 +54,10 @@ $(document).ready(function(){
     $("#loginModal").modal("hide");
   });
 
+  $("#logout").on('click', function(){
+    ref.unauth();
+    console.log("you're logged out");
+  });
 
 
   //set media constraints for audio only
