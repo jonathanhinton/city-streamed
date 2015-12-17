@@ -12,58 +12,20 @@
 
 <ng-view></ng-view>
 
-  <button type="" id="launchModal">Sign Up or Login</button>
-  <div id="loginModal" class="modal fade" tabindex="-1" role="dialog">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title">Sign Up or Login</h4>
-        </div>
-        <div class="modal-body">
-          <input type="text" class="form-control" name="username" id="userName" value="" placeholder="First and Last Name Please">
-          <input type="email" name="userEmail" class="form-control" id="userEmail" value="" placeholder="please type in your email">
-          <input type="password" name="userPassword" value="" placeholder="password" id="userPassword">
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" id="createUser">Create User</button>
-          <button type="button" class="btn btn-primary" id="githubAuth">Authenticate with Github</button>
-        </div>
-      </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-  </div><!-- /.modal -->
-
-  <p>Instructions: press and <strong><em>hold</em></strong> "Transmit" button until you are finished answering Pay attention to timer at bottom, have fun!  Keep in mind the recording works more like a live stream than a tape recorder...meaning, we won't edit audio. Recording will be posted to Firebase on MouseUp event.  Thanks!</p>
-  <h1>3 Questions:</h1>
-  <h2>1. What is one piece of advice you would give to Evening Cohort 3?</h2>
-  <h2>2. What is your favorite dish at your favorite restaurant here in Nashville?</h2>
-  <h2>3. Briefly describe the most amazing place on Earth you’ve been.</h2>
-  <button type="transmit" id="transmit">Transmit</button>
-  <button type="receive" id="receiveAudio">Receive</button>
-
-<!--   <div id="soundCloudWidget">
-    <iframe id="sc-widget" width="480" height="300" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/173735209&auto_play=false"></iframe>
-  </div> -->
-
-  <div id="countdown">
-
-  </div>
-  <button type="" id="logout">logout</button>
-  <div id="output">
-  </div>
 
   <script src="lib/bower_components/jquery/dist/jquery.min.js"></script>
   <script src="lib/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="lib/bower_components/firebase/firebase.js"></script>
   <script src="lib/bower_components/angular/angular.min.js"></script>
+  <script src="lib/bower_components/angularfire/dist/angularfire.min.js"></script>
     <script src="lib/bower_components/angular-animate/angular-animate.min.js"></script>
   <script src="lib/bower_components/angular-aria/angular-aria.min.js"></script>
   <script src="lib/bower_components/angular-route/angular-route.min.js"></script>
   <script src="lib/bower_components/angular-material/angular-material.min.js"></script>
-  <script src="lib/bower_components/angularfire/dist/angularfire.min.js"></script>
   <script src="lib/bower_components/oauth-js/dist/oauth.min.js"></script>
   <script src="lib/node_modules/msr/MediaStreamRecorder.min.js"></script>
   <script src="lib/node_modules/soundcloud/sdk.js"></script>
   <script src="javascripts/app.js"></script>
+  <script src="javascripts/auth.js"></script>
 </body>
 </html>

@@ -8,7 +8,7 @@ var auth = angular.module('Authorize', ['firebase']);
     }
   ]);
 
-  app.controller('authuserCtrl',
+  app.controller('authUserCtrl',
     ['$scope',
     'Auth',
     '$firebaseArray',
@@ -29,7 +29,7 @@ var auth = angular.module('Authorize', ['firebase']);
           $scope.loginUser();
         }).catch(function(error){
           console.log("User not created with error", error);
-        })
+        });
       };
       $scope.loginUser = function(){
         Auth.$authWithPassword({
@@ -47,7 +47,7 @@ var auth = angular.module('Authorize', ['firebase']);
           console.log("user logged in with id:", userData.uid);
           var ref = new Firebase('https://city-streamed.firebaseio.com/users/' + userData.uid + '/userinfo');
           ref.set({
-            email : $scope.email,
+            email : userData.github.email,
             userName : userData.github.displayName,
             uid : userData.auth.uid,
             image : userData.github.profileImageURL
@@ -60,6 +60,6 @@ var auth = angular.module('Authorize', ['firebase']);
       $scope.logout = function(){
         Auth.$unauth();
         console.log("user logged out");
-        $location.path('/')
+        $location.path('/');
       };
     }]);
