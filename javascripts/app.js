@@ -24,9 +24,14 @@ var app = angular.module('cityStreamed', ['Authorize', 'firebase', 'ngRoute', 'n
       var authData = Auth.$getAuth();
       var ref = new Firebase('https://city-streamed.firebaseio.com/users/' + authData.uid);
       var audioRef = new Firebase('https://city-streamed.firebaseio.com/audio');
-      this.audio = $currentInfo(audioRef);
+      this.audios = $currentInfo(audioRef);
       this.info = $currentInfo(ref);
       console.log("this info", this.info);
-      console.log("this.audio", this.audio);
+      console.log("this.audio", this.audios);
+
+      this.recordAudio = function(){
+
+      };
+
     }
     ]);
