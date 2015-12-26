@@ -7,57 +7,57 @@ $(document).ready(function(){
 
   OAuth.initialize('n2jZCZtPE01zQ0LbcOThbm12o9Y');
 
-  var ref = new Firebase("https://city-streamed.firebaseio.com");
-  $("#launchModal").on('click', function(){
-    $("#loginModal").modal('show');
-  });
+  // var ref = new Firebase("https://city-streamed.firebaseio.com");
+  // $("#launchModal").on('click', function(){
+  //   $("#loginModal").modal('show');
+  // });
 
-  $("#githubAuth").on('click', function(){
-    ref.authWithOAuthPopup("github", function(error, authData) {
-      if (error) {
-        console.log("Login Failed!", error);
-      } else {
-        var ref = new Firebase("city-streamed.firebaseio.com/users/" + authData.uid + "/userinfo");
-        ref.set({
-          email : userEmail,
-          userName : authData.github.displayName,
-          uid : authData.auth.uid,
-          image : authData.github.profileImageURL
-        });
-        console.log("Authenticated successfully with payload:", authData);
-      }
-    });
-    $("#loginModal").modal("hide");
-  });
+  // $("#githubAuth").on('click', function(){
+  //   ref.authWithOAuthPopup("github", function(error, authData) {
+  //     if (error) {
+  //       console.log("Login Failed!", error);
+  //     } else {
+  //       var ref = new Firebase("city-streamed.firebaseio.com/users/" + authData.uid + "/userinfo");
+  //       ref.set({
+  //         email : userEmail,
+  //         userName : authData.github.displayName,
+  //         uid : authData.auth.uid,
+  //         image : authData.github.profileImageURL
+  //       });
+  //       console.log("Authenticated successfully with payload:", authData);
+  //     }
+  //   });
+  //   $("#loginModal").modal("hide");
+  // });
 
-  $("#createUser").on('click', function(){
-    var newUserEmail = $("#userEmail").val();
-    var userName = $("#userName").val();
-    var userPassword = $("#userPassword").val();
-    ref.createUser({
-      email : newUserEmail,
-      password : userPassword
-    }, function(error, userData){
-      if (error) {
-        console.log("error creating account", error);
-      } else {
-        console.log("successfully created user account", userData.uid);
-        var ref = new Firebase("https://city-streamed.firebaseio.com/users/"+ userData.uid + "/userinfo");
-        ref.set({
-          userName : userName,
-          userEmail : newUserEmail,
-          audio : []
-        });
-      }
-    }
-    );
-    $("#loginModal").modal("hide");
-  });
+  // $("#createUser").on('click', function(){
+  //   var newUserEmail = $("#userEmail").val();
+  //   var userName = $("#userName").val();
+  //   var userPassword = $("#userPassword").val();
+  //   ref.createUser({
+  //     email : newUserEmail,
+  //     password : userPassword
+  //   }, function(error, userData){
+  //     if (error) {
+  //       console.log("error creating account", error);
+  //     } else {
+  //       console.log("successfully created user account", userData.uid);
+  //       var ref = new Firebase("https://city-streamed.firebaseio.com/users/"+ userData.uid + "/userinfo");
+  //       ref.set({
+  //         userName : userName,
+  //         userEmail : newUserEmail,
+  //         audio : []
+  //       });
+  //     }
+  //   }
+  //   );
+  //   $("#loginModal").modal("hide");
+  // });
 
-  $("#logout").on('click', function(){
-    ref.unauth();
-    console.log("you're logged out");
-  });
+  // $("#logout").on('click', function(){
+  //   ref.unauth();
+  //   console.log("you're logged out");
+  // });
 
 
   //set media constraints for audio only
@@ -142,12 +142,12 @@ $(document).ready(function(){
     //MOUSEDOWN begins transmission
       $("#transmit").mousedown(function(){
         mediaRecorder.start(15000);
+        console.log("mousedown");
 
-          countdown( "countdown", 0, 15 );
       //MOUSEUP ends transmission
         $("#transmit").mouseup(function(){
+          console.log("mouseUp");
           mediaRecorder.stop();
-          countdown("countdown", 0, 0);
         });
       });
 
