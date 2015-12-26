@@ -22,7 +22,7 @@ var auth = angular.module('Authorize', ['firebase']);
           var ref = new Firebase('https://city-streamed.firebaseio.com/users/' + userData.uid + '/userinfo');
           ref.set({
             email: $scope.email,
-            name: $scope.name,
+            userName: $scope.name,
             uid: userData.uid
           });
           console.log("user created with user id:", userData.uid);
