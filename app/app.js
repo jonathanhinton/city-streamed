@@ -20,7 +20,9 @@ var app = angular.module('cityStreamed', ['Authorize', 'firebase', 'ngRoute', 'n
     ['Auth',
     '$firebaseArray',
     '$location',
-    function(Auth, $currentInfo, $location){
+    '$sce',
+    'UserMedia',
+    function(Auth, $currentInfo, $location, $sce, UserMedia){
       var authData = Auth.$getAuth();
       var ref = new Firebase('https://city-streamed.firebaseio.com/users/' + authData.uid);
       var audioRef = new Firebase('https://city-streamed.firebaseio.com/audio');
@@ -30,57 +32,16 @@ var app = angular.module('cityStreamed', ['Authorize', 'firebase', 'ngRoute', 'n
       console.log("this.audio", this.audios);
 
       this.recordAudio = function(){
-      //set media constraints for audio only
-        var mediaConstraints = {
-          audio: true
-        };
-
-      //gain access to user microphone (note: only works with https)
-        navigator.getUserMedia(mediaConstraints, onMediaSuccess, onMediaError);
-
-      //if no errors in getUserMedia() this function will fire
-        function onMediaSuccess(stream) {
-
-        //create mediaStreamRecorder object
-          var mediaRecorder = new MediaStreamRecorder(stream);
-          mediaRecorder.mimeType = 'audio/ogg';
-          mediaRecorder.audioChannels = 1;
-
-        //when data is available, on stop() we see the blob!
-          mediaRecorder.ondataavailable = function (blob) {
-            console.log("blob", blob);
-
-            //declare variables to test conversion to base64
-            var testBase64;
-
-            //construct new fileReader object
-            var fileReader = new FileReader();
-            fileReader.onload = function () {
-
-              //declare dataURL variable from fileReader
-              var dataUrl =  fileReader.result;
-              testBase64 = dataUrl.split(",")[1];
-              console.log("testBase64", testBase64);
-              //POST base64 to firebase
-              // $.ajax({
-              //   url: "https://city-streamed.firebaseio.com/audio.json",
-              //   method: "POST",
-              //   data: JSON.stringify(testBase64)
-              //   }).done(function(testBase64) {
-              //     console.log("Your new recording is ", testBase64);
-              //   });
-              return testBase64;
-            };
-
-            fileReader.readAsDataURL(blob);
-
-          //creates cached preview to listen to recording in browser
-            var blobURL = URL.createObjectURL(blob);
-            console.log("blobURL", blobURL);
-          //   $("#output").append('<audio preload="auto" src="' + blobURL + '" controls=""></audio>');
-          // };
+        UserMedia.get().then(function(stream){
+          console.log("start audio recording", stream);
+          window.stream = stream;
+          if (window.URL) {
+            console.log("using window.URL");
+            this.audioStream = $sce.trustAsResourceUrl(window.URL.createObjectURL(stream));
+          } else {
+            this.audioStream = $sce.trustAsResourceUrl(stream);
+          }
+        })
       };
     }
-    };
-  }
-    ]);
+  ]);
