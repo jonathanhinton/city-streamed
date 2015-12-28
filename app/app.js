@@ -34,15 +34,17 @@ var app = angular.module('cityStreamed', ['Authorize', 'firebase', 'ngRoute', 'n
       this.recordAudio = function(){
         //get user media from UserMedia service
         UserMedia.get().then(function(stream){
+          //declare new MediaStreamRecorder object
+          var mediaRecorder = new MediaStreamRecorder(stream);
+          //set mimeType to Audio
+          mediaRecorder.mimeType = 'audio/ogg';
+          //set number of channels to 1
+          mediaRecorder.audioChannels = 1;
+          console.log("mediaRecorder", mediaRecorder);
           console.log("start audio recording", stream);
           window.stream = stream;
-          if (window.URL) {
-            console.log("using window.URL");
-            //Begin Stream
-            this.audioStream = $sce.trustAsResourceUrl(window.URL.createObjectURL(stream));
-          } else {
-            this.audioStream = $sce.trustAsResourceUrl(stream);
-          } // end else statement
+          this.audioStream = $sce.trustAsResourceUrl(window.URL.createObjectURL(stream));
+          console.log("this.audioStream", this.audioStream);
         }) //end .then()
       }; //end this.recordAudio()
 

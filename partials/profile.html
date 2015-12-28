@@ -3,8 +3,8 @@
 <div ng-repeat="audio in ProfileCtrl.audios">
   <p>{{audio.$id}}</p>
 </div>
-<button type="record" ng-click="ProfileCtrl.recordAudio()">record Audio</button>
-<button type="transmit" id="transmit">Transmit</button>
+<md-button class="md-primary md-raised" ng-click="ProfileCtrl.recordAudio()">record Audio</md-button>
+<md-button class="md-primary md-raised" id="transmit">Transmit</md-button>
 <div id="output">
 
 </div>
