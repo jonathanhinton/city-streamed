@@ -40,6 +40,7 @@ var app = angular.module('cityStreamed', ['Authorize', 'firebase', 'ngRoute', 'n
         //set number of channels to 1
         this.mediaRecorder.audioChannels = 1;
 
+        //augment ondataavailable function for mediaStreamRecorder
         this.mediaRecorder.ondataavailable = function(blob){
           console.log("blob", blob);
           var base64String;
