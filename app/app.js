@@ -31,23 +31,42 @@ var app = angular.module('cityStreamed', ['Authorize', 'firebase', 'ngRoute', 'n
       console.log("this info", this.info);
       console.log("this.audio", this.audios);
 
-      this.recordAudio = function(){
-        //get user media from UserMedia service
-        UserMedia.get().then(function(stream){
-          //declare new MediaStreamRecorder object
-          var mediaRecorder = new MediaStreamRecorder(stream);
-          //set mimeType to Audio
-          mediaRecorder.mimeType = 'audio/ogg';
-          //set number of channels to 1
-          mediaRecorder.audioChannels = 1;
-          console.log("mediaRecorder", mediaRecorder);
-          console.log("start audio recording", stream);
-          window.stream = stream;
-          this.audioStream = $sce.trustAsResourceUrl(window.URL.createObjectURL(stream));
-          console.log("this.audioStream", this.audioStream);
-        }) //end .then()
-      }; //end this.recordAudio()
+      //get user media from UserMedia service
+      UserMedia.get().then(function(stream){
+        //declare new MediaStreamRecorder object
+        this.mediaRecorder = new MediaStreamRecorder(stream);
+        //set mimeType to Audio
+        this.mediaRecorder.mimeType = 'audio/ogg';
+        //set number of channels to 1
+        this.mediaRecorder.audioChannels = 1;
+        console.log("mediaRecorder", mediaRecorder);
+        console.log("start audio recording", stream);
 
+        mediaRecorder.onDataAvailable = function(blob){
+          console.log("blob", blob);
+          var base64String;
+          var fileReader = new FileReader();
+          fileReader.onload = function(){
+            var dataUrl = fileReader.result;
+            base64String = dataUrl.split(",")[1];
+            console.log("base64String", base64String);
+            return base64String;
+          };
+          var blobURL = URL.createObjectURL(blob);
+          console.log("blobURL", blobURL);
+        }
+        window.stream = stream;
+        this.audioStream = $sce.trustAsResourceUrl(window.URL.createObjectURL(stream));
+        console.log("this.audioStream", this.audioStream);
+      }) //end .then()
+
+      this.startRecording = function(){
+        mediaRecorder.start(15000);
+      };
+
+      this.stopRecording = function(){
+        mediaRecorder.stop();
+      };
 
     }
   ]);
