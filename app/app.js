@@ -39,10 +39,8 @@ var app = angular.module('cityStreamed', ['Authorize', 'firebase', 'ngRoute', 'n
         this.mediaRecorder.mimeType = 'audio/ogg';
         //set number of channels to 1
         this.mediaRecorder.audioChannels = 1;
-        console.log("mediaRecorder", mediaRecorder);
-        console.log("start audio recording", stream);
 
-        mediaRecorder.onDataAvailable = function(blob){
+        this.mediaRecorder.ondataavailable = function(blob){
           console.log("blob", blob);
           var base64String;
           var fileReader = new FileReader();
@@ -52,13 +50,17 @@ var app = angular.module('cityStreamed', ['Authorize', 'firebase', 'ngRoute', 'n
             console.log("base64String", base64String);
             return base64String;
           };
+
+          fileReader.readAsDataURL(blob);
           var blobURL = URL.createObjectURL(blob);
           console.log("blobURL", blobURL);
-        }
+        };
+        console.log("mediaRecorder", this.mediaRecorder);
+        console.log("start audio recording", stream);
         window.stream = stream;
         this.audioStream = $sce.trustAsResourceUrl(window.URL.createObjectURL(stream));
         console.log("this.audioStream", this.audioStream);
-      }) //end .then()
+      }); //end .then()
 
       this.startRecording = function(){
         mediaRecorder.start(15000);
