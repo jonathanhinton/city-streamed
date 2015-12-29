@@ -51,7 +51,6 @@ var app = angular.module('cityStreamed', ['Authorize', 'firebase', 'ngRoute', 'n
             console.log("base64String", base64String);
             return base64String;
           };
-
           fileReader.readAsDataURL(blob);
           var blobURL = URL.createObjectURL(blob);
           console.log("blobURL", blobURL);
@@ -69,6 +68,10 @@ var app = angular.module('cityStreamed', ['Authorize', 'firebase', 'ngRoute', 'n
 
       this.stopRecording = function(){
         mediaRecorder.stop();
+      };
+
+      this.postString = function(){
+        console.log("this.base64String", this.base64String);
       };
 
     }
