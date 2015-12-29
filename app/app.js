@@ -26,6 +26,7 @@ var app = angular.module('cityStreamed', ['Authorize', 'firebase', 'ngRoute', 'n
       var authData = Auth.$getAuth();
       var ref = new Firebase('https://city-streamed.firebaseio.com/users/' + authData.uid);
       var audioRef = new Firebase('https://city-streamed.firebaseio.com/audio');
+      var base64String;
       this.audios = $currentInfo(audioRef);
       this.info = $currentInfo(ref);
       console.log("this info", this.info);
@@ -43,7 +44,7 @@ var app = angular.module('cityStreamed', ['Authorize', 'firebase', 'ngRoute', 'n
         //augment ondataavailable function for mediaStreamRecorder
         this.mediaRecorder.ondataavailable = function(blob){
           console.log("blob", blob);
-          var base64String;
+          // var base64String;
           var fileReader = new FileReader();
           fileReader.onload = function(){
             var dataUrl = fileReader.result;
@@ -71,7 +72,7 @@ var app = angular.module('cityStreamed', ['Authorize', 'firebase', 'ngRoute', 'n
       };
 
       this.postString = function(){
-        console.log("this.base64String", this.base64String);
+        console.log("base64String", base64String);
       };
 
     }
