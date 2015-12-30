@@ -21,7 +21,7 @@ var app = angular.module('cityStreamed', ['Authorize', 'firebase', 'ngRoute', 'n
     '$firebaseArray',
     '$location',
     '$sce',
-    '$routeParams'
+    '$routeParams',
     'UserMedia',
     function(Auth, $currentInfo, $location, $sce, $routeParams, UserMedia){
       var authData = Auth.$getAuth();
@@ -30,6 +30,18 @@ var app = angular.module('cityStreamed', ['Authorize', 'firebase', 'ngRoute', 'n
       var base64String = null;
       this.base64String = base64String;
       this.transmissions = $currentInfo(audioRef);
+
+      this.selectedTransmission = {};
+      this.transmissionId = $routeParams.transmissionId;
+      this.transmissions.$loaded()
+      .then(function(){
+        this.selectedTransmission = this.transmissions.$getRecord(this.transmissionId);
+        console.log("this.selectedTransmission", this.selectedTransmission);
+      }.bind(this))
+      .catch(function(error){
+        console.log("error", error);
+      });
+
       this.info = $currentInfo(ref);
       console.log("this info", this.info);
       console.log("this.transmissions", this.transmissions);
@@ -47,7 +59,6 @@ var app = angular.module('cityStreamed', ['Authorize', 'firebase', 'ngRoute', 'n
         //augment ondataavailable function for mediaStreamRecorder
         this.mediaRecorder.ondataavailable = function(blob){
           console.log("blob", blob);
-          // var base64String;
           var fileReader = new FileReader();
           fileReader.onload = function(){
             var dataUrl = fileReader.result;
@@ -82,6 +93,22 @@ var app = angular.module('cityStreamed', ['Authorize', 'firebase', 'ngRoute', 'n
           datePosted : Date.now()
         });
         console.log("new Transmission", this.transmissions);
+      };
+
+      this.playTransmission = function(transmission){
+        console.log("transmissionID", transmission.$id);
+        var data = transmission.dataString;
+        var binary = atob(data);
+        var len = binary.length;
+        var buffer = new ArrayBuffer(len);
+        var view = new Uint8Array(buffer);
+        for (var i = 0; i < len; i++) {
+          view[i] = binary.charCodeAt(i);
+        }
+        var blob = new Blob([view]);
+        console.log("blob", blob);
+        var blobURL = URL.createObjectURL(blob);
+        console.log("blobURL", blobURL);
       };
 
     }
