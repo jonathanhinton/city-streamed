@@ -70,11 +70,6 @@ var app = angular.module('cityStreamed', ['Authorize', 'firebase', 'ngRoute', 'n
           var blobURL = URL.createObjectURL(blob);
           console.log("blobURL", blobURL);
         };
-        console.log("mediaRecorder", this.mediaRecorder);
-        console.log("start audio recording", stream);
-        window.stream = stream;
-        this.audioStream = $sce.trustAsResourceUrl(window.URL.createObjectURL(stream));
-        console.log("this.audioStream", this.audioStream);
       }); //end .then()
 
       this.startRecording = function(){
