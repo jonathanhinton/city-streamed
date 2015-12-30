@@ -97,6 +97,7 @@ var app = angular.module('cityStreamed', ['Authorize', 'firebase', 'ngRoute', 'n
 
       this.playTransmission = function(transmission){
         console.log("transmissionID", transmission.$id);
+        var id = transmission.$id;
         var data = transmission.dataString;
         var binary = atob(data);
         var len = binary.length;
@@ -109,6 +110,8 @@ var app = angular.module('cityStreamed', ['Authorize', 'firebase', 'ngRoute', 'n
         console.log("blob", blob);
         var blobURL = URL.createObjectURL(blob);
         console.log("blobURL", blobURL);
+        var audioEl = angular.element(document.querySelector('#' + id));
+        audioEl.append('<audio autoplay preload="auto" src="' + blobURL + '"></audio>');
       };
 
     }

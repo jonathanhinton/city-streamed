@@ -3,7 +3,9 @@
 <img src="{{ProfileCtrl.info[0].image}}" alt="">
  -->
 <div ng-repeat="transmission in ProfileCtrl.transmissions">
-  <a id="{{transmission.$id}}" ng-click="ProfileCtrl.playTransmission(transmission)">{{transmission.title}} broadcast by {{transmission.userName}}</a>
+  <div id="{{transmission.$id}}">
+    <a ng-click="ProfileCtrl.playTransmission(transmission)">{{transmission.title}} broadcast by {{transmission.userName}}</a>
+  </div>
 </div>
 <md-button class="md-primary md-raised" ng-mousedown="ProfileCtrl.startRecording()" ng-mouseup="ProfileCtrl.stopRecording()">record Audio</md-button>
 <md-button class="md-primary md-raised" id="transmit" ng-click="ProfileCtrl.postString()">Post</md-button>
