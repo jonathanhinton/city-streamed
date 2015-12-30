@@ -1,11 +1,16 @@
 <h1>{{ProfileCtrl.info[0].userName}}</h1>
+<!--
 <img src="{{ProfileCtrl.info[0].image}}" alt="">
-<div ng-repeat="audio in ProfileCtrl.audios">
-  <p>{{audio.$id}}</p>
+ -->
+<div ng-repeat="transmission in ProfileCtrl.transmissions">
+  <p id="{{transmission.$id}}">{{transmission.title}} broadcast by {{transmission.userName}}</p>
 </div>
 <md-button class="md-primary md-raised" ng-mousedown="ProfileCtrl.startRecording()" ng-mouseup="ProfileCtrl.stopRecording()">record Audio</md-button>
-<md-button class="md-primary md-raised" id="transmit">Transmit</md-button>
 <md-button class="md-primary md-raised" id="transmit" ng-click="ProfileCtrl.postString()">Post</md-button>
+  <md-input-container id="titleInput">
+    <label>Title</label>
+    <input ng-model="ProfileCtrl.newTransmission.title">
+  </md-input-container>
 <div id="output">
 
 </div>

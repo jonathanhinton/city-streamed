@@ -20,9 +20,9 @@ app.service('UserMedia', ['$q', function($q){
       } //end error
         );
       return deferred.promise;
-    }
+    };
     //return get function as object
     return {
       get:get
-    }
+    };
 }]);

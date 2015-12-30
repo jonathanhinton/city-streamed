@@ -26,11 +26,13 @@ var app = angular.module('cityStreamed', ['Authorize', 'firebase', 'ngRoute', 'n
       var authData = Auth.$getAuth();
       var ref = new Firebase('https://city-streamed.firebaseio.com/users/' + authData.uid);
       var audioRef = new Firebase('https://city-streamed.firebaseio.com/audio');
-      var base64String;
-      this.audios = $currentInfo(audioRef);
+      var base64String = null;
+      this.base64String = base64String;
+      this.transmissions = $currentInfo(audioRef);
       this.info = $currentInfo(ref);
       console.log("this info", this.info);
-      console.log("this.audio", this.audios);
+      console.log("this.transmissions", this.transmissions);
+      this.newTransmission = {};
 
       //get user media from UserMedia service
       UserMedia.get().then(function(stream){
@@ -72,7 +74,13 @@ var app = angular.module('cityStreamed', ['Authorize', 'firebase', 'ngRoute', 'n
       };
 
       this.postString = function(){
-        console.log("base64String", base64String);
+        this.transmissions.$add({
+          title : this.newTransmission.title,
+          dataString : base64String,
+          userName : this.info[0].userName,
+          datePosted : Date.now()
+        });
+        console.log("new Transmission", this.transmissions);
       };
 
     }
