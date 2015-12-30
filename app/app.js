@@ -24,6 +24,9 @@ var app = angular.module('cityStreamed', ['Authorize', 'firebase', 'ngRoute', 'n
     '$routeParams',
     'UserMedia',
     function(Auth, $currentInfo, $location, $sce, $routeParams, UserMedia){
+      SC.initialize({
+        client_id: '5c9d9495ad00839c28558426b440b05a'
+      });
       var authData = Auth.$getAuth();
       var ref = new Firebase('https://city-streamed.firebaseio.com/users/' + authData.uid);
       var audioRef = new Firebase('https://city-streamed.firebaseio.com/audio');
