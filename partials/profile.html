@@ -7,77 +7,23 @@
     <a ng-click="ProfileCtrl.playTransmission(transmission)">{{transmission.title}} broadcast by {{transmission.userName}}</a>
   </div>
 </div>
-<md-button class="md-primary md-raised" ng-mousedown="ProfileCtrl.startRecording()" ng-mouseup="ProfileCtrl.stopRecording()">record Audio</md-button>
+
+<!-- <md-button class="md-primary md-raised" ng-mousedown="ProfileCtrl.startRecording()" ng-mouseup="ProfileCtrl.stopRecording()">record Audio</md-button>
 <md-button class="md-primary md-raised" id="transmit" ng-click="ProfileCtrl.postString()">Post</md-button>
   <md-input-container id="titleInput">
     <label>Title</label>
     <input ng-model="ProfileCtrl.newTransmission.title">
   </md-input-container>
+ -->
 
-
-<button class="md-primary md-raised md-button md-ink-ripple flex-gt-md-auto flex-100" type="button" ng-click="ProfileCtrl.showTabDialog($event)" flex="100" flex-gt-md="auto"><span class="ng-scope">
-      Tab Dialog
+<button class="md-warn md-raised md-button md-ink-ripple flex-gt-md-auto flex-100" type="button" ng-click="ProfileCtrl.showTabDialog($event)" flex="100" flex-gt-md="auto"><span class="ng-scope">
+      Broadcast Room
     </span><div class="md-ripple-container"></div></button>
 <div id="output">
 
 </div>
 
-
-<md-dialog aria-label="Transmission Room">
-  <md-toolbar>
-    <div class="md-toolbar-tools">
-      <h2>Transmission Room</h2>
-      <span flex></span>
-      <md-button class="md-icon-button" ng-click="ProfileCtrl.cancelDialog()">
-        <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog">X</md-icon>
-      </md-button>
-    </div>
-  </md-toolbar>
-  <md-dialog-content style="max-width:800px;max-height:810px; ">
-    <md-tabs md-dynamic-height md-border-bottom>
-      <md-tab label="1) Record">
-        <md-content class="md-padding">
-          <h1 class="md-display-2" id="countdown">15:00</h1>
-          <canvas id="visualizer">
-
-          </canvas>
-          <md-button class="md-primary md-raised" ng-mousedown="ProfileCtrl.startRecording()" ng-mouseup="ProfileCtrl.stopRecording()">Record Transmission</md-button>
-        </md-content>
-      </md-tab>
-      <md-tab label="2) Add Title">
-        <md-content class="md-padding">
-          <h1 class="md-display-2">Add Title</h1>
-          <md-input-container id="titleInput">
-            <label>Title</label>
-            <input ng-model="ProfileCtrl.newTransmission.title">
-          </md-input-container>
-          <md-button class="md-primary md-raised" id="transmit" ng-click="ProfileCtrl.postString()">Post Transmission</md-button>
-        </md-content>
-      </md-tab>
-      <md-tab label="3) Transmit">
-        <md-content class="md-padding">
-          <h1 class="md-display-2">Success!</h1>
-          <p>Your transmission has been broadcast successfully!</p>
-        </md-content>
-      </md-tab>
-    </md-tabs>
-  </md-dialog-content>
-<!--
-  <md-dialog-actions layout="row">
-    <md-button href="http://en.wikipedia.org/wiki/Mango" target="_blank" md-autofocus>
-      More on Wikipedia
-    </md-button>
-    <span flex></span>
-    <md-button ng-click="answer('not useful')" >
-      Not Useful
-    </md-button>
-    <md-button ng-click="answer('useful')" style="margin-right:20px;" >
-      Useful
-    </md-button>
-  </md-dialog-actions>
-   -->
-</md-dialog>
-
+<div ng-include="'partials/actionDialog.html'"></div>
 
 <md-bottom-sheet>
   <iframe width="100%" height="100" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/173735209&amp;color=ff5500&amp;auto_play=false&amp;hide_related=false&amp;show_comments=false&amp;show_user=false&amp;show_reposts=false"></iframe>

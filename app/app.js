@@ -52,6 +52,13 @@ var app = angular.module('cityStreamed', ['Authorize', 'firebase', 'ngRoute', 'n
       console.log("this.transmissions", this.transmissions);
       this.newTransmission = {};
 
+
+      this.maxTab = 2;
+      this.selectedIndex = 0;
+      this.nextTab = function(){
+        var index = (this.selectedIndex == this.max) ? 0 : this.selectedIndex + 1;
+        this.selectedIndex = index;
+      };
       //get user media from UserMedia service
       UserMedia.get().then(function(stream){
         //declare new MediaStreamRecorder object
@@ -83,6 +90,7 @@ var app = angular.module('cityStreamed', ['Authorize', 'firebase', 'ngRoute', 'n
 
       this.stopRecording = function(){
         mediaRecorder.stop();
+        this.nextTab();
       };
 
       this.postString = function(){
@@ -93,6 +101,7 @@ var app = angular.module('cityStreamed', ['Authorize', 'firebase', 'ngRoute', 'n
           datePosted : Date.now()
         });
         console.log("new Transmission", this.transmissions);
+        this.nextTab();
       };
 
       this.playTransmission = function(transmission){
@@ -139,5 +148,7 @@ var app = angular.module('cityStreamed', ['Authorize', 'firebase', 'ngRoute', 'n
       this.answerDialog = function($mdDialog, answer) {
         $mdDialog.hide(answer);
       };
+
+
     }
   ]);
