@@ -23,7 +23,9 @@ var app = angular.module('cityStreamed', ['Authorize', 'firebase', 'ngRoute', 'n
     '$sce',
     '$routeParams',
     'UserMedia',
-    function(Auth, $currentInfo, $location, $sce, $routeParams, UserMedia){
+    '$mdDialog',
+    '$mdMedia',
+    function(Auth, $currentInfo, $location, $sce, $routeParams, UserMedia, $mdDialog, $mdMedia){
       SC.initialize({
         client_id: '5c9d9495ad00839c28558426b440b05a'
       });
@@ -111,6 +113,33 @@ var app = angular.module('cityStreamed', ['Authorize', 'firebase', 'ngRoute', 'n
         var audioEl = angular.element(document.querySelector('#' + id));
         audioEl.append('<audio autoplay preload="auto" src="' + blobURL + '"></audio>');
       };
+      this.status = '';
 
+      this.customFullscreen = $mdMedia('xs') || $mdMedia('sm');
+      this.showTabDialog = function(ev) {
+        $mdDialog.show({
+          controller: DialogController,
+          templateUrl: '../partials/actionDialog.html',
+          parent: angular.element(document.body),
+          targetEvent: ev,
+          clickOutsideToClose:true
+        })
+            .then(function(answer) {
+              this.status = 'You said the information was "' + answer + '".';
+            }, function() {
+              this.status = 'You cancelled the dialog.';
+            });
+      };
+    function DialogController($mdDialog) {
+      this.hide = function() {
+        $mdDialog.hide();
+      };
+      this.cancel = function() {
+        $mdDialog.cancel();
+      };
+      this.answer = function(answer) {
+        $mdDialog.hide(answer);
+      };
+    }
     }
   ]);
