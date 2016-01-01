@@ -104,6 +104,7 @@ var app = angular.module('cityStreamed', ['Authorize', 'firebase', 'ngRoute', 'n
         this.nextTab();
       };
 
+
       this.playTransmission = function(transmission){
         console.log("transmissionID", transmission.$id);
         var id = transmission.$id;
