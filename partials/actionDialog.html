@@ -4,14 +4,14 @@
       <div class="md-toolbar-tools">
         <h2>Transmission Room</h2>
         <span flex></span>
-        <md-button class="md-icon-button" ng-click="cancel()">
-          <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+        <md-button class="md-icon-button" ng-click="ProfileCtrl.cancel()">
+          <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog">X</md-icon>
         </md-button>
       </div>
     </md-toolbar>
     <md-dialog-content style="max-width:800px;max-height:810px; ">
       <md-tabs md-dynamic-height md-border-bottom>
-        <md-tab label="one">
+        <md-tab label="1) Record">
           <md-content class="md-padding">
             <h1 class="md-display-2" id="countdown">15:00</h1>
             <canvas id="visualizer">
@@ -20,7 +20,7 @@
             <md-button class="md-primary md-raised" ng-mousedown="ProfileCtrl.startRecording()" ng-mouseup="ProfileCtrl.stopRecording()">Record Transmission</md-button>
           </md-content>
         </md-tab>
-        <md-tab label="two">
+        <md-tab label="2) Add Title">
           <md-content class="md-padding">
             <h1 class="md-display-2">Add Title</h1>
             <md-input-container id="titleInput">
@@ -30,7 +30,7 @@
             <md-button class="md-primary md-raised" id="transmit" ng-click="ProfileCtrl.postString()">Post Transmission</md-button>
           </md-content>
         </md-tab>
-        <md-tab label="three">
+        <md-tab label="3) Transmit">
           <md-content class="md-padding">
             <h1 class="md-display-2">Success!</h1>
             <p>Your transmission has been broadcast successfully!</p>

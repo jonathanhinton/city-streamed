@@ -118,7 +118,7 @@ var app = angular.module('cityStreamed', ['Authorize', 'firebase', 'ngRoute', 'n
       this.customFullscreen = $mdMedia('xs') || $mdMedia('sm');
       this.showTabDialog = function(ev) {
         $mdDialog.show({
-          controller: DialogController,
+          controller: 'profileCtrl as ProfileCtrl',
           templateUrl: '../partials/actionDialog.html',
           parent: angular.element(document.body),
           targetEvent: ev,
@@ -130,16 +130,14 @@ var app = angular.module('cityStreamed', ['Authorize', 'firebase', 'ngRoute', 'n
               this.status = 'You cancelled the dialog.';
             });
       };
-    function DialogController($mdDialog) {
-      this.hide = function() {
+      this.hideDialog = function($mdDialog) {
         $mdDialog.hide();
       };
-      this.cancel = function() {
+      this.cancelDialog = function($mdDialog) {
         $mdDialog.cancel();
       };
-      this.answer = function(answer) {
+      this.answerDialog = function($mdDialog, answer) {
         $mdDialog.hide(answer);
       };
-    }
     }
   ]);
