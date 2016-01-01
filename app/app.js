@@ -52,14 +52,8 @@ var app = angular.module('cityStreamed', ['Authorize', 'firebase', 'ngRoute', 'n
       console.log("this.transmissions", this.transmissions);
       this.newTransmission = {};
 
-
-      this.maxTab = 2;
-      this.selectedIndex = 0;
-      this.nextTab = function(){
-        var index = (this.selectedIndex == this.max) ? 0 : this.selectedIndex + 1;
-        this.selectedIndex = index;
-      };
-      //get user media from UserMedia service
+//WEB AUDIO API SETUP
+  //get user media from UserMedia service
       UserMedia.get().then(function(stream){
         //declare new MediaStreamRecorder object
         this.mediaRecorder = new MediaStreamRecorder(stream);
@@ -68,7 +62,7 @@ var app = angular.module('cityStreamed', ['Authorize', 'firebase', 'ngRoute', 'n
         //set number of channels to 1
         this.mediaRecorder.audioChannels = 1;
 
-        //augment ondataavailable function for mediaStreamRecorder
+  //augment ondataavailable function for mediaStreamRecorder
         this.mediaRecorder.ondataavailable = function(blob){
           console.log("blob", blob);
           var fileReader = new FileReader();
@@ -84,15 +78,20 @@ var app = angular.module('cityStreamed', ['Authorize', 'firebase', 'ngRoute', 'n
         };
       }); //end .then()
 
+//MEDIA RECORDER CONTROL FUNCTIONS
+
+  //start recording max 15 seconds
       this.startRecording = function(){
         mediaRecorder.start(15000);
       };
 
+  //stop recording
       this.stopRecording = function(){
         mediaRecorder.stop();
         this.nextTab();
       };
 
+  //post string to firebase after conversion to base64
       this.postString = function(){
         this.transmissions.$add({
           title : this.newTransmission.title,
@@ -104,7 +103,7 @@ var app = angular.module('cityStreamed', ['Authorize', 'firebase', 'ngRoute', 'n
         this.nextTab();
       };
 
-
+  //playback control converting from base64 back to blobURL
       this.playTransmission = function(transmission){
         console.log("transmissionID", transmission.$id);
         var id = transmission.$id;
@@ -123,8 +122,19 @@ var app = angular.module('cityStreamed', ['Authorize', 'firebase', 'ngRoute', 'n
         var audioEl = angular.element(document.querySelector('#' + id));
         audioEl.append('<audio autoplay preload="auto" src="' + blobURL + '"></audio>');
       };
+//DIALOG CONTROL FUNCTIONS
+  //dialog tab advance
+      this.maxTab = 2;
+      this.selectedIndex = 0;
+      this.nextTab = function(){
+        var index = (this.selectedIndex == this.max) ? 0 : this.selectedIndex + 1;
+        this.selectedIndex = index;
+      };
+
+  //set status for dialog answer
       this.status = '';
 
+  //show dialog function
       this.customFullscreen = $mdMedia('xs') || $mdMedia('sm');
       this.showTabDialog = function(ev) {
         $mdDialog.show({
@@ -134,12 +144,14 @@ var app = angular.module('cityStreamed', ['Authorize', 'firebase', 'ngRoute', 'n
           targetEvent: ev,
           clickOutsideToClose:true
         })
+  //display answer
             .then(function(answer) {
               this.status = 'You said the information was "' + answer + '".';
             }, function() {
               this.status = 'You cancelled the dialog.';
             });
       };
+  //hide dialog
       this.hideDialog = function($mdDialog) {
         $mdDialog.hide();
       };
