@@ -14,9 +14,9 @@
     <md-dialog-content style="max-width:800px;max-height:810px; ">
       <md-tabs md-dynamic-height md-border-bottom md-selected="ProfileCtrl.selectedIndex">
         <md-tab label="1) Record">
-          <md-content class="md-padding">
+          <md-content class="md-padding wrapper">
             <h1 class="md-display-2" id="countdown">15:00</h1>
-            <canvas id="visualizer">
+            <canvas id="visualizer" width="640" height="100">
 
             </canvas>
             <md-button class="md-primary md-raised" ng-mousedown="ProfileCtrl.startRecording()" ng-mouseup="ProfileCtrl.stopRecording()">Record Transmission</md-button>
