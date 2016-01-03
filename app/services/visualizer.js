@@ -1,11 +1,11 @@
 app.service('visualizer', [function(){
 //Set up canvas
-  var canvas = angular.element(document.querySelector("#visualizer"));
+  var canvas = angular.element(document.querySelector("#oscilloscope"));
     console.log("canvas", canvas);
-  var canvasCtx = canvas[0].getContext('2D');
-    console.log("canvasCtx", canvasCtx);
-  var intendedWidth = angular.element(document.querySelector('.wrapper')).clientWidth;
-  canvas[0].setAttribute('width', intendedWidth);
+  // var canvasCtx = canvas.getContext('2D');
+  //   console.log("canvasCtx", canvasCtx);
+  // var intendedWidth = angular.element(document.querySelector('.wrapper')).clientWidth;
+  // canvas.setAttribute('width', intendedWidth);
 
 //Set up audio context
   var audioCtx = new (window.AudioContext || window.webkitAudioContext)();

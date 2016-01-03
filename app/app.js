@@ -26,7 +26,8 @@ var app = angular.module('cityStreamed', ['Authorize', 'firebase', 'ngRoute', 'n
     '$mdDialog',
     '$mdMedia',
     'countdown',
-    function(Auth, $currentInfo, $location, $sce, $routeParams, UserMedia, $mdDialog, $mdMedia, countdown){
+    'visualizer',
+    function(Auth, $currentInfo, $location, $sce, $routeParams, UserMedia, $mdDialog, $mdMedia, countdown, visualizer){
       SC.initialize({
         client_id: '5c9d9495ad00839c28558426b440b05a'
       });
@@ -85,6 +86,7 @@ var app = angular.module('cityStreamed', ['Authorize', 'firebase', 'ngRoute', 'n
       this.startRecording = function(){
         mediaRecorder.start(15000);
         countdown.startTimer();
+        console.log("visualizer.canvas", visualizer.canvas);
       };
 
   //stop recording

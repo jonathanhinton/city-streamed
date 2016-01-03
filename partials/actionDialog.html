@@ -9,7 +9,7 @@
       <md-tab label="1) Record">
         <md-content class="md-padding wrapper">
           <h1 class="md-display-2" id="countdown">15.00 secs</h1>
-          <canvas id="visualizer" width="640" height="100">
+          <canvas id="oscilloscope" width="640" height="100">
 
           </canvas>
           <md-button class="md-primary md-raised" ng-mousedown="ProfileCtrl.startRecording()" ng-mouseup="ProfileCtrl.stopRecording()">Record Transmission</md-button>
@@ -29,7 +29,6 @@
         <md-content class="md-padding">
           <h1 class="md-display-2">Success!</h1>
           <p>Your transmission has been broadcast successfully!</p>
-          <md-button ng-click="!library = library" class="md-primary md-raised">Back to Library</md-button>
           </md-content>
       </md-tab>
     </md-tabs>
