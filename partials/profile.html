@@ -2,28 +2,21 @@
 <!--
 <img src="{{ProfileCtrl.info[0].image}}" alt="">
  -->
-<div ng-repeat="transmission in ProfileCtrl.transmissions">
+
+<div ng-if="!library"  ng-repeat="transmission in ProfileCtrl.transmissions">
   <div id="{{transmission.$id}}">
     <a ng-click="ProfileCtrl.playTransmission(transmission)">{{transmission.title}} broadcast by {{transmission.userName}}</a>
   </div>
 </div>
 
-<!-- <md-button class="md-primary md-raised" ng-mousedown="ProfileCtrl.startRecording()" ng-mouseup="ProfileCtrl.stopRecording()">record Audio</md-button>
-<md-button class="md-primary md-raised" id="transmit" ng-click="ProfileCtrl.postString()">Post</md-button>
-  <md-input-container id="titleInput">
-    <label>Title</label>
-    <input ng-model="ProfileCtrl.newTransmission.title">
-  </md-input-container>
- -->
-
-<button class="md-warn md-raised md-button md-ink-ripple flex-gt-md-auto flex-100" type="button" ng-click="ProfileCtrl.showTabDialog($event)" flex="100" flex-gt-md="auto"><span class="ng-scope">
-      Broadcast Room
+<button class="md-warn md-raised md-button md-ink-ripple flex-gt-md-auto flex-100" type="button" slide-toggle="#record" flex="100" flex-gt-md="auto" ng-click="library = !library"><span class="ng-scope">
+      Toggle
     </span><div class="md-ripple-container"></div></button>
 <div id="output">
 
 </div>
 
-<div ng-include="'partials/actionDialog.html'"></div>
+<div ng-if="library" ng-include="'partials/actionDialog.html'"></div>
 
 <md-bottom-sheet>
   <iframe width="100%" height="100" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/173735209&amp;color=ff5500&amp;auto_play=false&amp;hide_related=false&amp;show_comments=false&amp;show_user=false&amp;show_reposts=false"></iframe>

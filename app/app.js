@@ -25,7 +25,8 @@ var app = angular.module('cityStreamed', ['Authorize', 'firebase', 'ngRoute', 'n
     'UserMedia',
     '$mdDialog',
     '$mdMedia',
-    function(Auth, $currentInfo, $location, $sce, $routeParams, UserMedia, $mdDialog, $mdMedia){
+    'countdown',
+    function(Auth, $currentInfo, $location, $sce, $routeParams, UserMedia, $mdDialog, $mdMedia, countdown){
       SC.initialize({
         client_id: '5c9d9495ad00839c28558426b440b05a'
       });
@@ -83,11 +84,13 @@ var app = angular.module('cityStreamed', ['Authorize', 'firebase', 'ngRoute', 'n
   //start recording max 15 seconds
       this.startRecording = function(){
         mediaRecorder.start(15000);
+        countdown.startTimer();
       };
 
   //stop recording
       this.stopRecording = function(){
         mediaRecorder.stop();
+        countdown.resetTimer();
         this.nextTab();
       };
 
@@ -161,7 +164,5 @@ var app = angular.module('cityStreamed', ['Authorize', 'firebase', 'ngRoute', 'n
       this.answerDialog = function($mdDialog, answer) {
         $mdDialog.hide(answer);
       };
-
-
     }
   ]);
