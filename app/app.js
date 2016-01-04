@@ -140,6 +140,7 @@ var app = angular.module('cityStreamed', ['Authorize', 'firebase', 'ngRoute', 'n
       this.stopRecording = function(){
         mediaRecorder.stop();
         countdown.resetTimer();
+        visualizer.stopOscillate();
         this.nextTab();
       };
 

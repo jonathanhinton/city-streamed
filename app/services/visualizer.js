@@ -1,14 +1,15 @@
 app.service('visualizer', ['UserMedia', function(UserMedia){
+  var canvas = document.querySelector(".oscilloscope");
+    console.log("canvas", canvas);
+  var canvasCtx = canvas.getContext("2d");
+    console.log("canvasCtx", canvasCtx);
+  var WIDTH = canvas.width;
+  var HEIGHT = canvas.height;
+  canvasCtx.clearRect(0, 0, WIDTH, HEIGHT);
+  var drawVisual;
   return {
     oscillate : function(){
-    var canvas = document.querySelector(".oscilloscope");
-      console.log("canvas", canvas);
-    var canvasCtx = canvas.getContext("2d");
-      console.log("canvasCtx", canvasCtx);
-    var WIDTH = canvas.width;
-    var HEIGHT = canvas.height;
-    canvasCtx.clearRect(0, 0, WIDTH, HEIGHT);
-    var drawVisual;
+    canvas.style.visibility = 'visible';
     UserMedia.get().then(function(stream){
       var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
         console.log("audioCtx", audioCtx);
@@ -51,6 +52,9 @@ app.service('visualizer', ['UserMedia', function(UserMedia){
       }; //end draw function
       return draw();
     }); //end then(callback)
-    } //end oscillate function
+    }, //end oscillate function
+    stopOscillate : function(){
+      canvas.style.visibility = 'hidden';
+    }
   }  //end return statement
 }]);
