@@ -53,7 +53,6 @@ var app = angular.module('cityStreamed', ['Authorize', 'firebase', 'ngRoute', 'n
       console.log("this info", this.info);
       console.log("this.transmissions", this.transmissions);
       this.newTransmission = {};
-
 //WEB AUDIO API SETUP
   //get user media from UserMedia service
       UserMedia.get().then(function(stream){
@@ -63,6 +62,54 @@ var app = angular.module('cityStreamed', ['Authorize', 'firebase', 'ngRoute', 'n
         this.mediaRecorder.mimeType = 'audio/ogg';
         //set number of channels to 1
         this.mediaRecorder.audioChannels = 1;
+
+//setup canvas for visualizer
+        // var canvas = document.querySelector(".oscilloscope");
+        //   console.log("canvas", canvas);
+        // var canvasCtx = canvas.getContext("2d");
+        //   console.log("canvasCtx", canvasCtx);
+        // var WIDTH = canvas.width;
+        // var HEIGHT = canvas.height;
+        // canvasCtx.clearRect(0, 0, WIDTH, HEIGHT);
+        // var drawVisual;
+  //set up visualizer
+        // var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        //   console.log("audioCtx", audioCtx);
+        // var analyser = audioCtx.createAnalyser();
+        //   console.log("analyser", analyser);
+        // var source = audioCtx.createMediaStreamSource(stream);
+        //   console.log("source", source);
+        // source.connect(analyser);
+        // analyser.fftSize = 2048;
+        // var bufferLength = analyser.frequencyBinCount;
+        //   console.log("bufferLength", bufferLength);
+        // var dataArray = new Uint8Array(bufferLength);
+        //   console.log("dataArray", dataArray);
+        // analyser.getByteTimeDomainData(dataArray);
+
+      // this.oscillate = function(){
+      //   drawVisual = requestAnimationFrame(this.oscillate);
+      //   analyser.getByteTimeDomainData(dataArray);
+      //   canvasCtx.fillStyle = 'rgb(200, 200, 200)';
+      //     canvasCtx.fillRect(0, 0, WIDTH, HEIGHT);
+      //   canvasCtx.lineWidth = 2;
+      //     canvasCtx.strokeStyle = 'rgb(0, 0, 0)';
+      //     canvasCtx.beginPath();
+      //   var sliceWidth = WIDTH * 1.0 / bufferLength;
+      //   var x = 0;
+      //   for (var i = 0; i < bufferLength; i++){
+      //     var v = dataArray[i] / 128.0;
+      //     var y = v * HEIGHT/2;
+      //     if (i === 0) {
+      //         canvasCtx.moveTo(x, y);
+      //       } else {
+      //         canvasCtx.lineTo(x, y);
+      //       }
+      //     x += sliceWidth;
+      //     }
+      //   canvasCtx.lineTo(canvas.width, canvas.height/2);
+      //     canvasCtx.stroke();
+      //   };
 
   //augment ondataavailable function for mediaStreamRecorder
         this.mediaRecorder.ondataavailable = function(blob){
@@ -86,7 +133,7 @@ var app = angular.module('cityStreamed', ['Authorize', 'firebase', 'ngRoute', 'n
       this.startRecording = function(){
         mediaRecorder.start(15000);
         countdown.startTimer();
-        console.log("visualizer.canvas", visualizer.canvas);
+        visualizer.oscillate();
       };
 
   //stop recording
