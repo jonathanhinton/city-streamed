@@ -2,10 +2,14 @@
     <form name="userForm">
       <div layout="row" layout-xs="column" layout-sm="column" layout-align="space-between center">
       </div>
+      <md-card>
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline">
       <div layout-gt-sm="row">
         <md-input-container class="md-block" flex-gt-sm>
           <label>Name</label>
-          <input md-maxlength="30" ng-model="user.name" />
+          <input ng-model="name" />
           </div>
         </md-input-container>
         <div flex="5" hide-xs hide-sm>
@@ -13,24 +17,19 @@
         </div>
         <md-input-container class="md-block" flex-gt-sm>
           <label>Password</label>
-          <input name="password" type="password" ng-model="user.password" />
-          </div>
+          <input name="password" type="password" ng-model="password" />
         </md-input-container>
       </div>
       <div layout-gt-sm="row">
         <md-input-container class="md-block" flex-gt-sm>
           <label>Email</label>
-          <input name="email" ng-model="user.email"/>
+          <input name="email" ng-model="email"/>
         </md-input-container>
         <div flex="5" hide-xs hide-sm>
           <!-- Spacer //-->
         </div>
 
         <style>
-          /*
-           * The Material demos system does not currently allow targeting the body element, so this
-           * must go here in the HTML.
-           */
           body[dir=rtl] .hint {
             right: 2px;
             left: auto;
