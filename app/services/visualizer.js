@@ -11,7 +11,7 @@ app.service('visualizer', ['UserMedia', function(UserMedia){
     oscillate : function(){
     canvas.style.visibility = 'visible';
     UserMedia.get().then(function(stream){
-      var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      var audioCtx = (window.AudioContext || window.webkitAudioContext)();
         console.log("audioCtx", audioCtx);
       var analyser = audioCtx.createAnalyser();
         console.log("analyser", analyser);
@@ -49,12 +49,12 @@ app.service('visualizer', ['UserMedia', function(UserMedia){
         }
       canvasCtx.lineTo(canvas.width, canvas.height/2);
         canvasCtx.stroke();
-      }; //end draw function
+      } //end draw function
       return draw();
     }); //end then(callback)
     }, //end oscillate function
     stopOscillate : function(){
       canvas.style.visibility = 'hidden';
     }
-  }  //end return statement
+  };  //end return statement
 }]);

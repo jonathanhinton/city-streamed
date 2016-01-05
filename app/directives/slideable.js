@@ -42,5 +42,5 @@ app.directive('slideable', function () {
                 attrs.expanded = !attrs.expanded;
             });
         }
-    }
+    };
 });
