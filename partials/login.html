@@ -8,12 +8,10 @@
             <span class="md-headline">Create Account / Login</span>
           </md-card-title-text>
         </md-card-title>
-      </md-card>
       <div layout-gt-sm="row">
         <md-input-container class="md-block" flex-gt-sm>
           <label>Name</label>
           <input ng-model="name" />
-          </div>
         </md-input-container>
         <div flex="5" hide-xs hide-sm>
           <!-- Spacer //-->
@@ -40,6 +38,7 @@
         </style>
       </div>
     </form>
+    </md-card>
   </md-content>
 
 <div class="row">
@@ -58,7 +57,7 @@
           <button class="btn inputButtons" ng-click="loginUser()">Login</button>
       </div>
     </div>
-   <img src="https://assets-cdn.github.com/images/modules/logos_page/GitHub-Mark.png" ng-click="githubLogin()">
+   <img id="githubLogo" src="https://assets-cdn.github.com/images/modules/logos_page/GitHub-Mark.png" ng-click="githubLogin()">
   </div>
   <div class="col-xs-2"></div>
 

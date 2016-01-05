@@ -1,3 +1,13 @@
+#profilePhoto {
+  display: inline-block;
+  height: 50px;
+  width: 50px;
+}
 
+/**
+.oscilloscope {
+  border-radius: 100%;
+}
+**/
 
 /*# sourceMappingURL=main.css.map */

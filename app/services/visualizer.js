@@ -11,7 +11,7 @@ app.service('visualizer', ['UserMedia', function(UserMedia){
     oscillate : function(){
     canvas.style.visibility = 'visible';
     UserMedia.get().then(function(stream){
-      var audioCtx = (window.AudioContext || window.webkitAudioContext)();
+      var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
         console.log("audioCtx", audioCtx);
       var analyser = audioCtx.createAnalyser();
         console.log("analyser", analyser);
