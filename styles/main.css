@@ -4,10 +4,10 @@
   width: 50px;
 }
 
-/**
-.oscilloscope {
-  border-radius: 100%;
+#countdown {
+  font-family: "Wire One";
+  font-size: 5em;
 }
-**/
+
 
 /*# sourceMappingURL=main.css.map */

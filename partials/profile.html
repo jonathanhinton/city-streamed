@@ -5,6 +5,7 @@
         <span>{{ProfileCtrl.info[0].userName}}</span>
       </h2>
       <span flex></span>
+      <h1>CityStreamed</h1>
       <md-button class="md-icon-button" aria-label="Favorite" ng-click="library = !library">
         <md-icon md-svg-icon="img/icons/ic_mic_white_48px.svg"></md-icon>
       </md-button>
@@ -16,7 +17,19 @@
 
   <div ng-if="!library"  ng-repeat="transmission in ProfileCtrl.transmissions">
     <div id="{{transmission.$id}}">
-      <a ng-click="ProfileCtrl.playTransmission(transmission)">{{transmission.title}} broadcast by {{transmission.userName}}</a>
+      <a ng-click="ProfileCtrl.playTransmission(transmission)">
+      <md-card>
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline">{{transmission.title}}</span>
+            <span class="md-subhead">broadcast by {{transmission.userName}}</span>
+          </md-card-title-text>
+          <md-card-title-media>
+            <div class="md-media-sm card-media"><md-icon md-svg-icon="img/icons/ic_play_circle_outline_black_48px.svg"></md-icon></div>
+          </md-card-title-media>
+        </md-card-title>
+      </md-card>
+      </a>
     </div>
   </div>
 <!--
