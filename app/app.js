@@ -63,54 +63,6 @@ var app = angular.module('cityStreamed', ['Authorize', 'firebase', 'ngRoute', 'n
         //set number of channels to 1
         this.mediaRecorder.audioChannels = 1;
 
-//setup canvas for visualizer
-        // var canvas = document.querySelector(".oscilloscope");
-        //   console.log("canvas", canvas);
-        // var canvasCtx = canvas.getContext("2d");
-        //   console.log("canvasCtx", canvasCtx);
-        // var WIDTH = canvas.width;
-        // var HEIGHT = canvas.height;
-        // canvasCtx.clearRect(0, 0, WIDTH, HEIGHT);
-        // var drawVisual;
-  //set up visualizer
-        // var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        //   console.log("audioCtx", audioCtx);
-        // var analyser = audioCtx.createAnalyser();
-        //   console.log("analyser", analyser);
-        // var source = audioCtx.createMediaStreamSource(stream);
-        //   console.log("source", source);
-        // source.connect(analyser);
-        // analyser.fftSize = 2048;
-        // var bufferLength = analyser.frequencyBinCount;
-        //   console.log("bufferLength", bufferLength);
-        // var dataArray = new Uint8Array(bufferLength);
-        //   console.log("dataArray", dataArray);
-        // analyser.getByteTimeDomainData(dataArray);
-
-      // this.oscillate = function(){
-      //   drawVisual = requestAnimationFrame(this.oscillate);
-      //   analyser.getByteTimeDomainData(dataArray);
-      //   canvasCtx.fillStyle = 'rgb(200, 200, 200)';
-      //     canvasCtx.fillRect(0, 0, WIDTH, HEIGHT);
-      //   canvasCtx.lineWidth = 2;
-      //     canvasCtx.strokeStyle = 'rgb(0, 0, 0)';
-      //     canvasCtx.beginPath();
-      //   var sliceWidth = WIDTH * 1.0 / bufferLength;
-      //   var x = 0;
-      //   for (var i = 0; i < bufferLength; i++){
-      //     var v = dataArray[i] / 128.0;
-      //     var y = v * HEIGHT/2;
-      //     if (i === 0) {
-      //         canvasCtx.moveTo(x, y);
-      //       } else {
-      //         canvasCtx.lineTo(x, y);
-      //       }
-      //     x += sliceWidth;
-      //     }
-      //   canvasCtx.lineTo(canvas.width, canvas.height/2);
-      //     canvasCtx.stroke();
-      //   };
-
   //augment ondataavailable function for mediaStreamRecorder
         this.mediaRecorder.ondataavailable = function(blob){
           console.log("blob", blob);
@@ -150,7 +102,8 @@ var app = angular.module('cityStreamed', ['Authorize', 'firebase', 'ngRoute', 'n
           title : this.newTransmission.title,
           dataString : base64String,
           userName : this.info[0].userName,
-          datePosted : Date.now()
+          datePosted : Date.now(),
+          image : this.info[0].image
         });
         console.log("new Transmission", this.transmissions);
         this.nextTab();
@@ -182,37 +135,6 @@ var app = angular.module('cityStreamed', ['Authorize', 'firebase', 'ngRoute', 'n
       this.nextTab = function(){
         var index = (this.selectedIndex == this.max) ? 0 : this.selectedIndex + 1;
         this.selectedIndex = index;
-      };
-
-  //set status for dialog answer
-      this.status = '';
-
-  //show dialog function
-      this.customFullscreen = $mdMedia('xs') || $mdMedia('sm');
-      this.showTabDialog = function(ev) {
-        $mdDialog.show({
-          controller: 'profileCtrl as ProfileCtrl',
-          templateUrl: '../partials/actionDialog.html',
-          parent: angular.element(document.body),
-          targetEvent: ev,
-          clickOutsideToClose:true
-        })
-  //display answer
-            .then(function(answer) {
-              this.status = 'You said the information was "' + answer + '".';
-            }, function() {
-              this.status = 'You cancelled the dialog.';
-            });
-      };
-  //hide dialog
-      this.hideDialog = function($mdDialog) {
-        $mdDialog.hide();
-      };
-      this.cancelDialog = function($mdDialog) {
-        $mdDialog.cancel();
-      };
-      this.answerDialog = function($mdDialog, answer) {
-        $mdDialog.hide(answer);
       };
     }
   ]);

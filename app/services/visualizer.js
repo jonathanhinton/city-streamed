@@ -1,4 +1,6 @@
 app.service('visualizer', ['UserMedia', function(UserMedia){
+//set up canvas for visualizer
+  //IMPORTANT jquery and angular.element will not grab canvas. You must access it via the document
   var canvas = document.querySelector(".oscilloscope");
     console.log("canvas", canvas);
   var canvasCtx = canvas.getContext("2d");
@@ -7,6 +9,7 @@ app.service('visualizer', ['UserMedia', function(UserMedia){
   var HEIGHT = canvas.height;
   canvasCtx.clearRect(0, 0, WIDTH, HEIGHT);
   var drawVisual;
+//MODULE
   return {
     oscillate : function(){
     canvas.style.visibility = 'visible';
