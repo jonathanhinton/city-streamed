@@ -1,5 +1,5 @@
 #City Streamed
-Capstone project for front end development portion of Nashville Software School.
+This is an app that allows users to record a 15 second audio clip and play it back with a Soundcloud playlist streaming in the background.
 
 #Running The App
 After cloning the repo, in the city-streamed directory enter the folling commands:
