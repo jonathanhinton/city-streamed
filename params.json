@@ -1,0 +1,6 @@
+{
+  "name": "City-streamed",
+  "tagline": "Capstone Project",
+  "body": "#City Streamed\r\nThis is an app that allows users to record a 15 second audio clip and play it back with a Soundcloud playlist streaming in the background.\r\n\r\n#Running The App\r\nAfter cloning the repo, in the city-streamed directory enter the folling commands:\r\n```\r\ncd lib\r\nbower install\r\nnpm install\r\n```\r\nBecause this app uses `getUserMedia()`, you will need to be able to serve local files using https. This will only work if you have a valid self-signed certificate.  In the main directory for the application copy and paste this code in the command line `openssl req -x509 -newkey rsa:2048 -keyout key.pem -out cert.pem -nodes`.  There will be several prompts after this command is entered feel free to hit `return` until you get back to the command line.  After that run `http-server --ssl`. Now prefix the I.P. your serving files on with `https://`.  You should be able to run the app now!",
+  "note": "Don't delete this file! It's used internally to help with page regeneration."
+}
